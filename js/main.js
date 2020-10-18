@@ -27,15 +27,17 @@ var inputs = {}
 const HOST = `https://divu-back.herokuapp.com`
 function trackChange(element) {
 	id = element.id
-	if (element.type == 'checkbox') {
-		value = element.checked
+	if (element.id == 'fieldsOfInterest') {
+		var instance = M.FormSelect.getInstance(element);
+		value = instance.getSelectedValues();
+		console.log('hey')
+
 	}
 	else {
 		value = element.value
 	}
 	inputs[id] = value
 }
-
 async function sendInfo() {
 	let response = await fetch(HOST + '/info', {
         method: 'POST',
