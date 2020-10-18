@@ -39,8 +39,18 @@ function trackChange(element) {
 async function sendInfo() {
 	let response = await fetch(HOST + '/info', {
         method: 'POST',
-        body: JSON.stringify(inputs)
+		body: JSON.stringify(inputs),
+		mode: "cors",
+		headers: {
+			'Content-Type': 'application/json',
+			'Access-Control-Allow-Origin': "*"
+		  }
+
       });
-    let result = await response.json()
+	let result = await response.json()
+	if(result['msg'] == 'OK'){
+		location.href = 'https://divuapp.github.io/'
+		alert('Cadastro realizado com sucesso!')
+	}
 
 }
